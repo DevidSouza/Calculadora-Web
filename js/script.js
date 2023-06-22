@@ -112,7 +112,13 @@ function calcular() {
         expressao += conteudo_tela[carac].replace('x', '*')
     }
 
+    if (conteudo_tela.includes('=')){
+        conteudo_tela = conteudo_tela.replace('=', '')
+        conteudo_tela = conteudo_tela.replace(' ', '')
+    }
+
     if (conteudo_tela.length == 1 || conteudo_tela == ''){
+        tela.innerHTML = '= ' + conteudo_tela
         return
     }
 
