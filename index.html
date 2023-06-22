@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilocss.css">
+    <title>Calculadora</title>
+</head>
+<body>
+    <main class="calc-corpo">
+        <p style="text-align: left; margin: 5px; color: rgb(103, 99, 99);">Calculadora</p>
+        <header class="calc-tela">
+            <p id="resultado" style="height: 18px; margin-top: 14px; margin-right: 14px;"></p>
+            <h1 id="tela" style="padding-right: 15px; padding-top: 6px; color: black;"></h1>
+        </header>
+
+        <main id="calc-area-bt" class="calc-area-botoes">
+            <div class="area-botoes-especiais" onclick="ce()">CE</div>
+            <div class="area-botoes-especiais" onclick="limpa()">C</div>
+            <div class="area-botoes-especiais" onclick="del()">DEL</div>
+            <div class="area-botoes-especiais" onclick="digita_numero('/')">/</div>
+            <div class="area-botoes" onclick="digita_numero('7')">7</div>
+            <div class="area-botoes" onclick="digita_numero('8')">8</div>
+            <div class="area-botoes" onclick="digita_numero('9')">9</div>
+            <div class="area-botoes-especiais" onclick="digita_numero('x')">x</div>
+            <div class="area-botoes" onclick="digita_numero('4')">4</div>
+            <div class="area-botoes" onclick="digita_numero('5')">5</div>
+            <div class="area-botoes" onclick="digita_numero('6')">6</div>
+            <div class="area-botoes-especiais" style="font-size: 10px;" onclick="digita_numero('-')">__</div>
+            <div class="area-botoes" onclick="digita_numero('1')">1</div>
+            <div class="area-botoes" onclick="digita_numero('2')">2</div>
+            <div class="area-botoes" onclick="digita_numero('3')">3</div>
+            <div class="area-botoes-especiais" onclick="digita_numero('+')">+</div>
+            <div class="area-botoes" style="flex: 20%;" onclick="digita_numero('0')">0</div>
+            <div class="area-botoes" style="flex: 20%; font-size: 30px;" onclick="digita_numero('.')">.</div>
+            <div id="bt-igual" class="area-botoes-especiais igual" onclick="calcular()">=</div>
+        </main>
+    </main>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>
