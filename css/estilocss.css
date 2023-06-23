@@ -14,12 +14,11 @@ body{
 .titulo{
     text-align: left;
     color: rgb(103, 99, 99);
+    display: inline-block;
+    /* background-color: blueviolet; */
+    margin: 5px;
 }
 
-img{
-    position: relative;
-    top: 4px;
-}
 
 .calc-corpo{
     margin-top: 100px;
@@ -32,11 +31,11 @@ img{
 }
 
 .calc-tela{
-    /* border: 1px solid blue; */
     height: 80px;
     text-align: right;
     color: rgb(103, 99, 99);
     margin: 0;
+    /* border: 1px solid blue; */
 }
 
 .calc-area-botoes{
@@ -50,7 +49,7 @@ img{
 
 .area-botoes{
     flex: 20%;
-    height: 62px;
+    height: 64px;
     text-align: center;
     line-height: 60px;
     margin: 2px;
@@ -66,7 +65,7 @@ img{
 
 .area-botoes-especiais{
     flex: 20%;
-    height: 62px;
+    height: 64px;
     text-align: center;
     line-height: 60px;
     margin: 2px;
