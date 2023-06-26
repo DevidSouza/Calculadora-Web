@@ -93,7 +93,6 @@ function insere_digito(digito) {
 function trata_zero(expressao) {
     let v_u = variaveis_uteis()
     if (v_u.ultimo_caracter_tela == '0') {
-        console.log(inverte_expressao(expressao))
         return inverte_expressao(expressao);
     }
 }
