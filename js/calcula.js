@@ -93,7 +93,8 @@ function insere_digito(digito) {
 function trata_zero(expressao) {
     let v_u = variaveis_uteis()
     if (v_u.ultimo_caracter_tela == '0') {
-        return inverte_expressao(expressao);
+        // IMPEDE QUE O ZERO SE REPITA ENTRE UM OPERADOR E UM NUMERO DE 1 À 9
+        return nao_repete_zero(expressao);
     }
 }
 
@@ -206,7 +207,7 @@ function x_para_asterisco(expressao) {
     return expressao_atualizada;
 }
 
-function inverte_expressao(expressao) {
+function nao_repete_zero(expressao) {
     let expressao_invertida = [];
     for (indice in expressao) {
         expressao_invertida.unshift(expressao[indice]);
