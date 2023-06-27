@@ -6,7 +6,6 @@ let operad_aritimeticos = '/+-x';
 let letras = 'abcdefghijklmnopqrstuvwyz'
 let numeros = '1234567890'
 
-
 // FUNÇÃO QUE CLICA NOS BOTÕES DA CALCULADORA CAPTURADOS PELO EVENTO 'KEYDOWN'
 document.addEventListener('keydown', (e) => {
     if (e.key == 'Enter') {
@@ -69,32 +68,30 @@ function insere_digito(digito) {
     }
 
 
-    if (trata_zero(v_u.conteudo_tela)) {
-        if (!operad_aritimeticos.includes(digito)){
+    if (trata_zero(v_u.conteudo_tela, digito)) {
+        if (!operad_aritimeticos.includes(digito)) {
             tela.innerHTML = v_u.conteudo_tela.substring(0, v_u.conteudo_tela.length - 1) + digito;
             return;
         }
     }
 
     if (trata_operad_aritimeticos(digito)) {
-        if ((v_u.ultimo_caracter_tela == '.')) {
-        }
         tela.innerHTML = v_u.conteudo_tela.substring(0, v_u.conteudo_tela.length - 1) + digito;
         return;
     }
 
-    if (trata_ponto(digito, v_u.conteudo_tela)) {
+    if (trata_ponto(digito, v_u.conteudo_tela, v_u.ultimo_caracter_tela)) {
         return;
     }
 
     tela.innerHTML += digito;
 }
 
-function trata_zero(expressao) {
+function trata_zero(expressao, digito) {
     let v_u = variaveis_uteis()
     if (v_u.ultimo_caracter_tela == '0') {
         // IMPEDE QUE O ZERO SE REPITA ENTRE UM OPERADOR E UM NUMERO DE 1 À 9
-        return nao_repete_zero(expressao);
+        return nao_repete_zero(expressao, digito);
     }
 }
 
@@ -131,22 +128,21 @@ function trata_operad_aritimeticos(digito) {
     return digito_tratado;
 };
 
-function trata_ponto(digito, expressao) {
-    let v_u = variaveis_uteis()
+function trata_ponto(digito,conteudo_tela, ultm_caracter) {
     if (digito == '.') {
         // IMPEDE QUE O '.' SE REPITA MAIS DE UMA VEZ SEGUIDA
-        if (v_u.ultimo_caracter_tela == '.') {
+        if (ultm_caracter == '.') {
             return true;
         }
-        // IMPEDE QUE O '.' SE REPIDA ANTES DE UM OPERADOR ARITIMÉTICO (/-+X)
-        if (numeros.includes(v_u.ultimo_caracter_tela)) {
-            if (expressao.includes(digito)) {
+        // IMPEDE QUE O '.' SE REPIDA, CASO CONTENHA NA EXPRESSÃO APENAS NÚMEROS E 1 '.'
+        if (numeros.includes(ultm_caracter)) {
+            if (nao_repete_ponto(conteudo_tela)) {
                 return true;
             }
         }
         // IMPEDE QUE O '.' SEJA INSERIDO, CASO O ÚLTIMO CARATCTER DA
         // TELA (EXPRESSÃO ATUAL) SEJA UM OPERADOR ARITIMÉTICO (-+/X)
-        if (operad_aritimeticos.includes(v_u.ultimo_caracter_tela)) {
+        if (operad_aritimeticos.includes(ultm_caracter)) {
             return true;
         }
     }
@@ -207,16 +203,54 @@ function x_para_asterisco(expressao) {
     return expressao_atualizada;
 }
 
-function nao_repete_zero(expressao) {
+function nao_repete_zero(expressao, digito) {
     let expressao_invertida = [];
     for (indice in expressao) {
         expressao_invertida.unshift(expressao[indice]);
     }
     for (indice in expressao_invertida) {
         if (operad_aritimeticos.includes(expressao_invertida[indice])) {
+            if ((expressao_invertida[indice - 1] == '0') && (digito == '.')){
+                return false;
+            }
             if (expressao_invertida[indice - 1] == '0') {
                 return true;
             }
         }
     }
+}
+
+function nao_repete_ponto(expressao) {
+    let nova_expressao = '';
+    if (!expressao.includes('.')) {
+        return false;
+    }
+
+    for (indice in expressao) {
+        if (!operad_aritimeticos.includes(expressao[indice])) {
+            nova_expressao += expressao[indice];
+        }
+    }
+
+    if ((nova_expressao.length == expressao.length)) {
+        return true;
+    }
+
+    expressao_invertida = '';
+    for (i = expressao.length - 1; i >= 0; i--) {
+        expressao_invertida += expressao[i];
+    }
+
+    let indice_ponto = expressao_invertida.indexOf('.');
+    let indice_ponto_e_menor = false;
+
+    for (indice in expressao_invertida) {
+        if (operad_aritimeticos.includes(expressao_invertida[indice])) {
+            if (indice_ponto < indice) {
+                indice_ponto_e_menor = true;
+            }
+            break
+        }
+    }
+    return indice_ponto_e_menor;
 }
