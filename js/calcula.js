@@ -90,7 +90,7 @@ function insere_digito(digito) {
 function trata_zero(expressao, digito) {
     let v_u = variaveis_uteis()
     if (v_u.ultimo_caracter_tela == '0') {
-        // IMPEDE QUE O ZERO SE REPITA ENTRE UM OPERADOR E UM NUMERO DE 1 À 9
+        // IMPEDE QUE O ZERO SE REPITA ENTRE UM OPERADOR E UM NUMERO DE 1 À 9 (EX.: X09)
         return nao_repete_zero(expressao, digito);
     }
 }
@@ -210,6 +210,7 @@ function nao_repete_zero(expressao, digito) {
     }
     for (indice in expressao_invertida) {
         if (operad_aritimeticos.includes(expressao_invertida[indice])) {
+    
             if ((expressao_invertida[indice - 1] == '0') && (digito == '.')){
                 return false;
             }
@@ -222,16 +223,19 @@ function nao_repete_zero(expressao, digito) {
 
 function nao_repete_ponto(expressao) {
     let nova_expressao = '';
+    // PERMITE QUE O PRIMEIRO PONTO SEJA ADICIONADO, CASO EXISTA APENAS NÚMEROS NA TELA
     if (!expressao.includes('.')) {
         return false;
     }
 
+    // VERIFICA SE HÁ OPERADORES NA TELA
     for (indice in expressao) {
         if (!operad_aritimeticos.includes(expressao[indice])) {
             nova_expressao += expressao[indice];
         }
     }
 
+    // IMPEDE QUE '.' REPITA, CASO EXISTA APENAS NÚMEROS E PELO MENOS 1 '.'
     if ((nova_expressao.length == expressao.length)) {
         return true;
     }
@@ -244,6 +248,7 @@ function nao_repete_ponto(expressao) {
     let indice_ponto = expressao_invertida.indexOf('.');
     let indice_ponto_e_menor = false;
 
+    // PERMITE A INSERSÃO DE APENAS 1 '.' DEPOIS DE 1 OPERADOR
     for (indice in expressao_invertida) {
         if (operad_aritimeticos.includes(expressao_invertida[indice])) {
             if (indice_ponto < indice) {
