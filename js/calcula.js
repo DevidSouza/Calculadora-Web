@@ -23,12 +23,9 @@ document.addEventListener('keydown', (e) => {
 })
 
 function variaveis_uteis() {
-    let conteudo_tela = tela.textContent;
-    let conteudo_resultado = resultado.textContent;
     let variaveis = {
-        'conteudo_tela': conteudo_tela,
-        'conteudo_resultado': conteudo_resultado,
-        'ultimo_caracter_tela': conteudo_tela[conteudo_tela.length - 1]
+        'conteudo_tela': tela.textContent,
+        'ultimo_caracter_tela': tela.textContent[tela.textContent.length - 1]
     };
     return variaveis;
 }
