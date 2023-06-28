@@ -175,6 +175,9 @@ function calcular() {
     }
 
     let expressao_executada = String(eval(x_para_asterisco(expressao)))
+    if (parseFloat(expressao_executada) % 2 !== 0){
+        expressao_executada = String(eval(x_para_asterisco(expressao)).toFixed(2))
+    }
 
     if (expressao_executada == 'Infinity') {
         tela.innerHTML = ''
