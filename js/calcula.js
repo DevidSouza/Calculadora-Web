@@ -21,6 +21,18 @@ document.addEventListener('keydown', (e) => {
         }
     }
 })
+// DIMINUE A FONTE SE A O COMPRIMENTO DA EXPRESSÃO SE APROXIMAR DO COMPRIMENTO DA TELA (ATIVADO PELO ECVENTO 'KEYPRESS')
+document.addEventListener('keypress', (e)=>{
+    if (tela.clientWidth == 320){
+        tela.style.fontSize = '20px';
+    }
+})
+// DIMINUE A FONTE SE A O COMPRIMENTO DA EXPRESSÃO SE APROXIMAR DO COMPRIMENTO DA TELA (ATIVADO PELO ECVENTO 'CLICK')
+document.addEventListener('click', (e)=>{
+    if (tela.clientWidth == 320){
+        tela.style.fontSize = '20px';
+    }
+})
 
 function variaveis_uteis() {
     let variaveis = {
@@ -32,7 +44,6 @@ function variaveis_uteis() {
 
 function insere_digito(digito) {
     tela.style.color = 'black';
-    tela.style.fontSize = '2em';
 
     // INSTACIANDO OBJETO VARIAVEIS DA FUNÇÃO 'VARIAVEIS_UTEIS()'
     let v_u = variaveis_uteis();
@@ -151,11 +162,13 @@ function del() {
 }
 
 function limpa() {
+    tela.style.fontSize = '2em';
     tela.innerHTML = ''
     resultado.innerHTML = ''
 }
 
 function ce() {
+    tela.style.fontSize = '2em';
     tela.innerHTML = ''
 }
 
